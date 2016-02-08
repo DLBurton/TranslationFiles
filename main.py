@@ -18,7 +18,10 @@ def KiteArguments() :
 
     parser = argparse.ArgumentParser(description='Translate some files.')
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Print to screen')
+    parser.add_argument('--reverse', dest='reverse', action='store_true', help='Create csv files rather than parse them back')
+
     parser.set_defaults(verbose=False)
+    parser.set_defaults(reverse=False)
 
     requiredNamed = parser.add_argument_group('required named arguments')
     requiredNamed.add_argument('-f', '--file', dest='file', help='Add folder path', required=True)
@@ -36,6 +39,6 @@ if __name__ == "__main__":
 
     now = datetime.datetime.now()
 
-    kite_folder = Translate_Files('Kite_Translations_' + now.strftime('%d-%m-%Y_%H-%M-%S'), verbose=arguments.verbose, input_file=arguments.file)
+    kite_folder = Translate_Files('Kite_Translations_' + now.strftime('%d-%m-%Y_%H-%M-%S'), verbose=arguments.verbose, input_file=arguments.file, reverse=arguments.reverse)
 
     kite_folder.parse_files()

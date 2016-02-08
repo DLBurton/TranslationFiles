@@ -9,9 +9,10 @@ from parsers.server import ServerParser
 
 class Translate_Files(object):
 
-    def __init__(self, folder_name, verbose=False, input_file=None):
+    def __init__(self, folder_name, verbose=False, input_file=None, reverse=False):
 
         self.verbose = verbose
+        self.reverse = reverse
         self._folder_name = folder_name
         self.input_file = input_file
         self.android_path = None
@@ -57,7 +58,7 @@ class Translate_Files(object):
 
     def parse_files(self):
 
-        AndroidParser(input_folder=os.path.join(self.input_file, 'Android'), output_folder=self.android_path, verbose=self.verbose)
-        AppleParser(input_folder=os.path.join(self.input_file, 'Apple'), output_folder=self.apple_path, verbose=self.verbose)
-        ServerParser(input_folder=os.path.join(self.input_file, 'Server'), output_folder=self.server_path, verbose=self.verbose)
+        AndroidParser(input_folder=os.path.join(self.input_file, 'Android'), output_folder=self.android_path, verbose=self.verbose, reverse=self.reverse)
+        AppleParser(input_folder=os.path.join(self.input_file, 'Apple'), output_folder=self.apple_path, verbose=self.verbose, reverse=self.reverse)
+        ServerParser(input_folder=os.path.join(self.input_file, 'Server'), output_folder=self.server_path, verbose=self.verbose, reverse=self.reverse)
 

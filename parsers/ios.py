@@ -6,7 +6,10 @@ import csv
 
 class AppleParser(BaseParser):
 
-     def _go_parse(self):
+    def _go_csv(self):
+        pass
+
+    def _go_parse(self):
 
         #Ok first lets get all the files that currently exist within the input folder
         for root, dirs, files in os.walk(self._input_folder):
@@ -16,7 +19,7 @@ class AppleParser(BaseParser):
                                       output_file=os.path.join(self._output_folder, os.path.splitext(file)[0])+'.strings')
 
 
-     def parse_as_strings(self, input_file=None, output_file=None):
+    def parse_as_strings(self, input_file=None, output_file=None):
 
          if self.verbose: print("   Generating iOS SDK .strings File :" + output_file + " from file : " + input_file)
 

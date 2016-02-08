@@ -7,6 +7,9 @@ from shutil import copyfile
 
 class ServerParser(BaseParser):
 
+    def _go_csv(self):
+        pass
+
     def _go_parse(self):
 
         #Ok first lets get all the files that currently exist within the input folder
@@ -19,12 +22,10 @@ class ServerParser(BaseParser):
                     self.parse_as_csv(input_file=os.path.join(root, file),
                                       output_file=os.path.join(self._output_folder, os.path.splitext(file)[0])+'.csv')
 
-
     def parse_as_csv(self, input_file=None, output_file=None):
 
         if self.verbose: print("    Generating CSV File :" + output_file + " from file : " + input_file)
         copyfile(input_file, output_file)
-
 
     def parse_as_po(self, input_file=None, output_file=None):
 
