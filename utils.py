@@ -34,10 +34,13 @@ class Translate_Files(object):
         for dir in directories:
 
             if self._dir_exists(os.path.join(self.input_file, dir)):
-                if self.verbose: print("Creating SubFolder : " + os.path.join(self._folder_name, dir))
+                if self.verbose: print("    Creating SubFolder : " + os.path.join(self._folder_name, dir))
                 self._mkdir_p(os.path.join(self._folder_name, dir))
                 #Now we set the attributes for that the parsers can get at them later
                 setattr(self, directories[dir], os.path.join(self._folder_name, dir))
+
+        if self.verbose: print("\n\n")
+
 
     def _dir_exists(self, path):
         return os.path.isdir(path)

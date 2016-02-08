@@ -14,15 +14,13 @@ class AndroidParser(BaseParser):
         for root, dirs, files in os.walk(self._input_folder):
             for file in files:
                 if file.endswith(".csv"):
-                    print(os.path.join(root, file))
                     self.parse_as_xml(input_file=os.path.join(root, file),
                                       output_file=os.path.join(self._output_folder, os.path.splitext(file)[0])+'.xml')
 
 
-
     def parse_as_xml(self, input_file=None, output_file=None):
 
-        if self.verbose: print("Generating XML File :" + output_file + " from file : " + input_file)
+        if self.verbose: print("    Generating XML File :" + output_file + " from file : " + input_file)
 
         csvData = csv.reader(open(input_file))
         csvData.next()
@@ -38,8 +36,9 @@ class AndroidParser(BaseParser):
 
             root = etree.Element('resources')
             for row in inner_csvData:
-                string = etree.SubElement(root, 'string', name=row[0].decode('utf-8'))
-                string.text = row[index].decode('utf-8')
+                if row[0]:
+                    string = etree.SubElement(root, 'string', name=row[0].decode('utf-8'))
+                    string.text = row[index].decode('utf-8')
 
 
             result = etree.tostring(root, pretty_print=True)
